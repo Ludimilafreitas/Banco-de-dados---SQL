@@ -1,0 +1,48 @@
+create database Mercado;
+use Mercado;
+
+create table Cliente (
+codCliente smallint  not null unique,
+nome varchar (60) not null,
+telefone varchar (11),
+endereco char (100) not null,
+primary key (codCliente));
+
+create table Categoria(
+codCategoria smallint not null unique,
+nome varchar (60) not null,
+primary key (codCategoria));
+
+create table Produto(
+codProduto smallint not null unique,
+nome varchar (20),
+codCategoriaProduto smallint not null,
+estoque float,
+valor float ,
+constraint codCategoriaProduto  foreign key (codCategoriaProduto) references categoria (codCategoria),
+primary key (codProduto));
+
+create table Pedido(
+codPedido smallint not null unique,
+codClientePedido smallint,
+constraint codClientePedido foreign key (codClientePedido) references cliente (codCliente),
+dataPedido date,
+primary key (codPedido));
+
+create table PedidoProduto(
+codPedidoPedidoProduto smallint,
+constraint codPedidoPedidoProduto foreign key (codPedidoPedidoProduto) references pedido (codPedido),
+codProdutoPedidoProduto smallint,
+constraint  codProdutoPedidoProduto foreign key (codProdutoPedidoProduto) references produto (codProduto),
+quantProduto char (5),
+primary key (codPedidoPedidoProduto,codProdutoPedidoProduto));
+
+
+
+
+
+
+
+
+
+
